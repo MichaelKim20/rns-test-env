@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+  agora:
+    image: "bpfk/agora:latest"
+    ports:
+      - "2826:2826"
+    volumes:
+      - "./agora/:/agora/"
+
+  stoa:
+    image: "bpfk/stoa:latest"
+    depends_on:
+      - "agora"
+    ports:
+      - "3836:3836"
+    volumes:
+      - "./stoa/:/stoa/wd/"
+
+  faucet:
+    image: "bpfk/faucet:latest"
+    depends_on:
+      - "agora"
+    command: "http://agora:2826/"

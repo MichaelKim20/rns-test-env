@@ -1,0 +1,31 @@
+node:
+  testing: true
+  limit_test_validators: 1
+
+  # You might want to change this
+  block_interval_sec: 20
+
+  address:       0.0.0.0
+  port:          2826
+
+  min_listeners: 0
+  max_listeners: 10
+  retry_delay:   500
+  max_retries:   25
+  timeout:       2000
+  data_dir: .cache
+  preimage_reveal_interval: 100
+
+validator:
+  enabled: true
+  # NODE6 is first in the list of enrollments
+  seed: SBVADJX3I7B4FVTMTYYSJABZR4B5HMJV5LSL2DY2C5DOVIHXFLLHJXMI
+  registry_address: disabled
+
+consensus:
+  validator_cycle: 20
+
+# You might want to change this to one of:
+# Trace, Info, Warn, Error, Fatal, None (default)
+logging:
+  level: Trace

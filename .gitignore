@@ -1,0 +1,7 @@
+# The network is configured that way
+agora/.cache/
+stoa/data/
+stoa/logs/
+
+# Emacs
+*~
