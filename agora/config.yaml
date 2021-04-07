@@ -26,6 +26,11 @@ banman:
   max_failed_requests: 10
   ban_duration: 86400
 
+admin:
+  enabled: true      # `false` by default
+  address: 0.0.0.0   # Private
+  port:    2827      # 0xB0B
+
 validator:
   enabled: true
   # NODE6 is first in the list of enrollments

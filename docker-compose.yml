@@ -6,6 +6,7 @@ services:
     image: "bpfk/agora:latest"
     ports:
       - "2826:2826"
+      - "2827:2827"
     volumes:
       - "./agora/:/agora/"
 
