@@ -16,16 +16,38 @@ node:
   data_dir: .cache
   preimage_reveal_interval: 100
 
-validator:
-  enabled: true
-  # NODE6 is first in the list of enrollments
-  seed: SBVADJX3I7B4FVTMTYYSJABZR4B5HMJV5LSL2DY2C5DOVIHXFLLHJXMI
-  registry_address: disabled
+  tx_payload_max_size: 1024
+  tx_payload_fee_factor: 200
 
 consensus:
   validator_cycle: 20
 
+banman:
+  max_failed_requests: 10
+  ban_duration: 86400
+
+validator:
+  enabled: true
+  # NODE6 is first in the list of enrollments
+  seed: SDV3GLVZ6W7R7UFB2EMMY4BBFJWNCQB5FTCXUMD5ZCFTDEVZZ3RQ2BZI
+  registry_address: disabled
+
+network:
+  # Supported value: IPv4, IPv6
+  - http://node-1:2826
+  -
 # You might want to change this to one of:
 # Trace, Info, Warn, Error, Fatal, None (default)
 logging:
-  level: Trace
+  level: Info
+
+event_handlers:
+  # URLs to push a data when a block is externalized. (path is "/block_externalized")
+  block_externalized:
+    - http://stoa:3836/block_externalized
+  # URLs to push a data when a pre-image is updated. (path is "/preimage_received")
+  preimage_received:
+    - http://stoa:3836/preimage_received
+  # URLs to push a data when a transaction is updated. (path is "/transaction_received")
+  transaction_received:
+    - http://stoa:3836/transaction_received

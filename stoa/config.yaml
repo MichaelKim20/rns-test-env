@@ -11,3 +11,7 @@ logging:
   # Values: error, warn, info, http, verbose, debug, silly
   level: http
   console: true
+
+consensus:
+  # 2021-01-01:00:00:00 GMT
+  genesis_timestamp: 1609459200
