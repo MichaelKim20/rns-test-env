@@ -3,7 +3,7 @@ node:
   limit_test_validators: 1
 
   # You might want to change this
-  block_interval_sec: 20
+  block_interval_sec: 120
 
   address:       0.0.0.0
   port:          2826
