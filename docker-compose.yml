@@ -3,7 +3,7 @@ version: '3'
 services:
 
   agora:
-    image: "bpfk/agora:michael"
+    image: "mukeunkim/agora:latest"
     ports:
       - "2826:2826"
       - "2827:2827"
@@ -11,7 +11,7 @@ services:
       - "./agora/:/agora/"
 
   stoa:
-    image: "bpfk/stoa:latest"
+    image: "mukeunkim/stoa:latest"
     depends_on:
       - "agora"
     ports:
@@ -19,8 +19,8 @@ services:
     volumes:
       - "./stoa/:/stoa/wd/"
 
-  faucet:
-    image: "bpfk/faucet:latest"
-    depends_on:
-      - "agora"
-    command: "http://agora:2826/"
+#  faucet:
+    #    image: "bpfk/faucet:tools"
+      #depends_on:
+      #- "agora"
+    #command: "http://agora:2826/"
