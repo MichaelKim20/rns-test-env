@@ -3,7 +3,7 @@ version: '3'
 services:
 
   agora:
-    image: "bpfk/agora:latest"
+    image: "bpfk/agora:michael"
     ports:
       - "2826:2826"
       - "2827:2827"
