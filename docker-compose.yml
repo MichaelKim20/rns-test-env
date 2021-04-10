@@ -19,8 +19,9 @@ services:
     volumes:
       - "./stoa/:/stoa/wd/"
 
-#  faucet:
-    #    image: "bpfk/faucet:tools"
-      #depends_on:
-      #- "agora"
-    #command: "http://agora:2826/"
+  sendtx:
+    image: "mukeunkim/sendtx:latest"
+    depends_on:
+      - "agora"
+    volumes:
+      - "./sendtx/:/sendtx/wd/"
