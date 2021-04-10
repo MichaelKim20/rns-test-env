@@ -18,3 +18,9 @@ logging:
   level: http
   # Default to false
   console: true
+
+process:
+  enable: true
+  only_genesis: false
+  delay: 1000
+  key_count: 1000
