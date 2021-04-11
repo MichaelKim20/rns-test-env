@@ -22,5 +22,5 @@ logging:
 process:
   enable: true
   only_genesis: false
-  delay: 3000
+  delay: 5000
   key_count: 500
