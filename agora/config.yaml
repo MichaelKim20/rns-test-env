@@ -34,17 +34,61 @@ admin:
 validator:
   enabled: true
   # NODE6 is first in the list of enrollments
-  seed: SDV3GLVZ6W7R7UFB2EMMY4BBFJWNCQB5FTCXUMD5ZCFTDEVZZ3RQ2BZI
+  seed: SAUHVPR7O7F2QGLDVXG3DQTVHXESE3ZAWHIIGKT35LCHIPLZBZTAFXJA
   registry_address: disabled
+
+################################################################################
+##                             Flash configuration                            ##
+## Configuration options for the Flash functionality of the node.             ##
+##                                                                            ##
+################################################################################
+flash:
+  # Whether or not the Flash protocol should be supported
+  enabled: false
+  # Timeout for each request in milliseconds
+  timeout: 10000
+  # This is a randomly generated keypair
+  # DO NOT USE THOSE VALUES ANYWHERE
+  # Private seed:    SCT4KKJNYLTQO4TVDPVJQZEONTVVW66YLRWAINWI3FZDY7U4JS4JJEI4
+  # Public address:  GCOQEOHAUFYUAC6G22FJ3GZRNLGVCCLESEJ2AXBIJ5BJNUVTAERPLRIJ
+  seed: SAUHVPR7O7F2QGLDVXG3DQTVHXESE3ZAWHIIGKT35LCHIPLZBZTAFXJA
+
+  # Address to the listener which will receive payment / update notifications
+  listener_address: http://127.0.0.1:4004
+
+  # Minimum funding allowed for a channel to be opened (in BOA)
+  min_funding: 0
+
+  # Maximum funding allowed for a channel to be opened (in BOA)
+  max_funding: 100000
+
+  # Minimum number of blocks before settling can begin after a trigger
+  # transaction has been published
+  min_settle_time: 6
+
+  # Maximum number of blocks afte which settling can begin after a trigger
+  # transaction has been published
+  max_settle_time: 144
+
+  # Maximum number of seconds to re-try a failed payment / update request
+  # before the request is considered failed and is reported to the listener
+  # (wallet / etc)
+  max_retry_time: 60
 
 network:
   # Supported value: IPv4, IPv6
   - http://node-1:2826
   -
+
+dns:
+  # Supported value: FQDN seed
+  - seed.bosagora.io
+
 # You might want to change this to one of:
 # Trace, Info, Warn, Error, Fatal, None (default)
 logging:
-  level: Info
+  root:
+    level: Info
 
 event_handlers:
   # URLs to push a data when a block is externalized. (path is "/block_externalized")
