@@ -2,18 +2,60 @@ version: '3'
 
 services:
 
-  agora:
+  node-2:
     image: "mukeunkim/agora:latest"
     ports:
-      - "2826:2826"
-      - "2827:2827"
+      - "4002:2826"
     volumes:
-      - "./agora/:/agora/"
+      - "./agora/node/2/:/agora/"
+
+  node-3:
+    image: "mukeunkim/agora:latest"
+    ports:
+      - "4003:3826"
+    volumes:
+      - "./agora/node/3/:/agora/"
+
+  node-4:
+    image: "mukeunkim/agora:latest"
+    ports:
+      - "4004:4826"
+    volumes:
+      - "./agora/node/4/:/agora/"
+
+  node-5:
+    image: "agora:latest"
+    ports:
+      - "4005:5826"
+    volumes:
+      - "./agora/node/5/:/agora/"
+
+  node-6:
+    image: "mukeunkim/agora:latest"
+    ports:
+      - "4006:6826"
+    volumes:
+      - "./agora/node/6/:/agora/"
+
+  node-7:
+    image: "mukeunkim/agora:latest"
+    ports:
+      - "4007:7826"
+    volumes:
+      - "./agora/node/7/:/agora/"
+
+  # non-validator node
+  node-0:
+    image: "mukeunkim/agora:latest"
+    ports:
+      - "4000:1826"
+    volumes:
+      - "./agora/node/0/:/agora/"
 
   stoa:
     image: "mukeunkim/stoa:latest"
     depends_on:
-      - "agora"
+      - "node-0"
     ports:
       - "3836:3836"
     volumes:
@@ -22,6 +64,12 @@ services:
   sendtx:
     image: "mukeunkim/sendtx:latest"
     depends_on:
-      - "agora"
+      - "node-0"
+      - "node-2"
+      - "node-3"
+      - "node-4"
+      - "node-5"
+      - "node-6"
+      - "node-7"
     volumes:
       - "./sendtx/:/sendtx/wd/"

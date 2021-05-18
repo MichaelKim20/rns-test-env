@@ -6,7 +6,7 @@ server:
   stoa_endpoint:  http://stoa:3836
 
   # Endpoint of Agora
-  agora_endpoint: http://agora:2826
+  agora_endpoint: http://node-0:1826
 
 ################################################################################
 ##                               Logging options                              ##
