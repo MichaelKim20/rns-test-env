@@ -3,7 +3,7 @@ node:
   limit_test_validators: 1
 
   # You might want to change this
-  block_interval_sec: 120
+  block_interval_sec: 5
 
   address:       0.0.0.0
   port:          2826
@@ -14,7 +14,35 @@ node:
   max_retries:   25
   timeout:       2000
   data_dir: .cache
-  preimage_reveal_interval: 100
+  # The local address where the stats server (currently Prometheus)
+  # is going to connect to, for example: http://0.0.0.0:8008
+  # It can also be set to -1 do disable listening (default is -1)
+  stats_listening_port: 9110
+  # The new block time offset has to be greater than the previous block time offset
+  # but less than current time + block_time_offset_tolerance_secs
+  block_time_offset_tolerance_secs: 60
+  # The duration between requests for doing periodic network discovery
+  network_discovery_interval_secs: 5
+  # The duration between requests for retrieving the latest blocks
+  # from all other nodes
+  block_catchup_interval_secs: 20
+  # The maximum number of transactions relayed in every batch.
+  # Value 0 means no limit.
+  relay_tx_max_num: 100
+  # Transaction relay batch is triggered in every `relay_tx_interval_secs`.
+  # Value 0 means, the transaction will be relayed immediately.
+  relay_tx_interval_secs: 30
+  # The minimum amount of fee a transaction has to have to be relayed.
+  # The fee is adjusted by the transaction size:
+  # adjusted fee = fee / transaction size in bytes.
+  relay_tx_min_fee: 0
+  # Transaction put into the relay queue will expire, and will be removed
+  # after `relay_tx_cache_exp_secs`.
+  relay_tx_cache_exp_secs: 1200
+  # The percentage by which the double spend transaction's fee should be
+  # increased in order to be added to the transaction pool
+  double_spent_threshold_pct: 20
+
 
   tx_payload_max_size: 1024
   tx_payload_fee_factor: 200
@@ -36,6 +64,8 @@ validator:
   # NODE6 is first in the list of enrollments
   seed: SAUHVPR7O7F2QGLDVXG3DQTVHXESE3ZAWHIIGKT35LCHIPLZBZTAFXJA
   registry_address: disabled
+  recurring_enrollment: true
+  preimage_reveal_interval: 100
 
 ################################################################################
 ##                             Flash configuration                            ##
@@ -54,7 +84,7 @@ flash:
   seed: SAUHVPR7O7F2QGLDVXG3DQTVHXESE3ZAWHIIGKT35LCHIPLZBZTAFXJA
 
   # Address to the listener which will receive payment / update notifications
-  listener_address: http://127.0.0.1:4004
+  #listener_address: http://127.0.0.1:4004
 
   # Minimum funding allowed for a channel to be opened (in BOA)
   min_funding: 0
@@ -89,6 +119,30 @@ dns:
 logging:
   root:
     level: Info
+    console: true
+    propagate: true
+    file: log/root.log
+
+  agora.node.Ledger:
+    level: Trace
+    console: true
+    file: log/ledger.log
+
+  agora.consensus.EnrollmentManager:
+    level: Trace
+    console: false
+    file: log/enrollment_manager.log
+
+  agora.consensus.protocol.Nominator:
+    level: Trace
+    console: false
+    file: log/nominator.log
+
+  SCP:
+    level: Trace
+    console: false
+    propagate: true
+    file: log/scp.log
 
 event_handlers:
   # URLs to push a data when a block is externalized. (path is "/block_externalized")
