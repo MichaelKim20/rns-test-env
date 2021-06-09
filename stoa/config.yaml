@@ -4,7 +4,11 @@ server:
   agora_endpoint: http://agora:2826
 
 database:
-  filename: data/main.db
+  host : "mysql"
+  user : root
+  database : stoa
+  password : "12345678"
+  port : 3306
 
 logging:
   folder: logs/

@@ -47,6 +47,11 @@ node:
   tx_payload_max_size: 1024
   tx_payload_fee_factor: 200
 
+interfaces:
+  - type:    http
+    address: 0.0.0.0
+    port:    2826
+
 consensus:
   validator_cycle: 20
 
@@ -61,8 +66,8 @@ admin:
 
 validator:
   enabled: true
-  # NODE6 is first in the list of enrollments
-  seed: SAUHVPR7O7F2QGLDVXG3DQTVHXESE3ZAWHIIGKT35LCHIPLZBZTAFXJA
+  # NODE2 is first in the list of enrollments
+  seed: SAQXRDHTWME4GUIVNYCKPN433VJ4BJP2L2T7UWHGSSW47VFC67EQFY3S
   registry_address: disabled
   recurring_enrollment: true
   preimage_reveal_interval: 100
