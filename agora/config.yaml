@@ -1,51 +1,21 @@
+#
+# This configuration file is intended to provide a standalone local network
+# with a single validator.
+#
+# This configuration is provided for the convenience of developers and should
+# not be used in production. See `doc/config.example.yaml` for a full,
+# up to date example of the configuration options available
+#
+# Run from the root with:
+# ./build/agora -c devel/config-single.yaml
+
 node:
   testing: true
   limit_test_validators: 1
-
-  # You might want to change this
   block_interval_sec: 5
-
-  address:       0.0.0.0
-  port:          2826
-
-  min_listeners: 0
-  max_listeners: 10
-  retry_delay:   500
-  max_retries:   25
-  timeout:       2000
   data_dir: .cache
-  # The local address where the stats server (currently Prometheus)
-  # is going to connect to, for example: http://0.0.0.0:8008
-  # It can also be set to -1 do disable listening (default is -1)
-  stats_listening_port: 9110
-  # The new block time offset has to be greater than the previous block time offset
-  # but less than current time + block_time_offset_tolerance_secs
-  block_time_offset_tolerance_secs: 60
-  # The duration between requests for doing periodic network discovery
-  network_discovery_interval_secs: 5
-  # The duration between requests for retrieving the latest blocks
-  # from all other nodes
-  block_catchup_interval_secs: 20
-  # The maximum number of transactions relayed in every batch.
-  # Value 0 means no limit.
-  relay_tx_max_num: 100
-  # Transaction relay batch is triggered in every `relay_tx_interval_secs`.
-  # Value 0 means, the transaction will be relayed immediately.
-  relay_tx_interval_secs: 30
-  # The minimum amount of fee a transaction has to have to be relayed.
-  # The fee is adjusted by the transaction size:
-  # adjusted fee = fee / transaction size in bytes.
-  relay_tx_min_fee: 0
-  # Transaction put into the relay queue will expire, and will be removed
-  # after `relay_tx_cache_exp_secs`.
-  relay_tx_cache_exp_secs: 1200
-  # The percentage by which the double spend transaction's fee should be
-  # increased in order to be added to the transaction pool
-  double_spent_threshold_pct: 20
-
-
-  tx_payload_max_size: 1024
-  tx_payload_fee_factor: 200
+  # Can be used with curl or just a browser
+  stats_listening_port: 9111
 
 interfaces:
   - type:    http
@@ -55,69 +25,20 @@ interfaces:
 consensus:
   validator_cycle: 20
 
-banman:
-  max_failed_requests: 10
-  ban_duration: 86400
-
-admin:
-  enabled: true      # `false` by default
-  address: 0.0.0.0   # Private
-  port:    2827      # 0xB0B
-
 validator:
   enabled: true
-  # NODE2 is first in the list of enrollments
-  seed: SAQXRDHTWME4GUIVNYCKPN433VJ4BJP2L2T7UWHGSSW47VFC67EQFY3S
+  # We use first of Genesis Block enrollments: val7: boa1xrval7gwhjz4k9raqukcnv2n4rl4fxt74m2y9eay6l5mqdf4gntnzhhscrh
+  seed: SAWI3JZWDDSQR6AX4DRG2OMS26Y6XY4X2WA3FK6D5UW4WTU74GUQXRZP
   registry_address: disabled
-  recurring_enrollment: true
-  preimage_reveal_interval: 100
 
-################################################################################
-##                             Flash configuration                            ##
-## Configuration options for the Flash functionality of the node.             ##
-##                                                                            ##
-################################################################################
-flash:
-  # Whether or not the Flash protocol should be supported
-  enabled: false
-  # Timeout for each request in milliseconds
-  timeout: 10000
-  # This is a randomly generated keypair
-  # DO NOT USE THOSE VALUES ANYWHERE
-  # Private seed:    SCT4KKJNYLTQO4TVDPVJQZEONTVVW66YLRWAINWI3FZDY7U4JS4JJEI4
-  # Public address:  GCOQEOHAUFYUAC6G22FJ3GZRNLGVCCLESEJ2AXBIJ5BJNUVTAERPLRIJ
-  seed: SAUHVPR7O7F2QGLDVXG3DQTVHXESE3ZAWHIIGKT35LCHIPLZBZTAFXJA
+admin:
+  enabled: true
+  address: 0.0.0.0
+  port:    2827
 
-  # Address to the listener which will receive payment / update notifications
-  #listener_address: http://127.0.0.1:4004
-
-  # Minimum funding allowed for a channel to be opened (in BOA)
-  min_funding: 0
-
-  # Maximum funding allowed for a channel to be opened (in BOA)
-  max_funding: 100000
-
-  # Minimum number of blocks before settling can begin after a trigger
-  # transaction has been published
-  min_settle_time: 6
-
-  # Maximum number of blocks afte which settling can begin after a trigger
-  # transaction has been published
-  max_settle_time: 144
-
-  # Maximum number of seconds to re-try a failed payment / update request
-  # before the request is considered failed and is reported to the listener
-  # (wallet / etc)
-  max_retry_time: 60
-
+# The node will self-ban but this section needs at least one entry
 network:
-  # Supported value: IPv4, IPv6
-  - http://node-1:2826
-  -
-
-dns:
-  # Supported value: FQDN seed
-  - seed.bosagora.io
+  - http://agora:2826/
 
 # You might want to change this to one of:
 # Trace, Info, Warn, Error, Fatal, None (default)
