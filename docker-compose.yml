@@ -32,10 +32,10 @@ services:
     volumes:
       - "./stoa/:/stoa/wd/"
 
-#  sendtx:
-    #    image: "mukeunkim/sendtx:latest"
-      #depends_on:
-      #- "agora"
-      #- "stoa"
-      #volumes:
-      #- "./sendtx/:/sendtx/wd/"
+  sendtx:
+    image: "mukeunkim/sendtx:latest"
+    depends_on:
+      - "agora"
+      - "stoa"
+    volumes:
+      - "./sendtx/:/sendtx/wd/"
