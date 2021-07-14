@@ -62,4 +62,3 @@ network:
   - http://node-4:4735
   - http://node-5:5735
   - http://node-6:6735
-  - http://node-7:7735

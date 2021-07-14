@@ -37,13 +37,6 @@ services:
     volumes:
       - "./agora/node/6/:/agora/"
 
-  node-7:
-    image: "mukeunkim/agora:latest"
-    ports:
-      - "4007:7826"
-    volumes:
-      - "./agora/node/7/:/agora/"
-
   mysql:
     image: "mysql:8.0"
     ports:
@@ -63,7 +56,6 @@ services:
       - "node-4"
       - "node-5"
       - "node-6"
-      - "node-7"
       - "mysql"
     ports:
       - "3836:3836"
@@ -78,7 +70,6 @@ services:
       - "node-4"
       - "node-5"
       - "node-6"
-      - "node-7"
       - "stoa"
     volumes:
       - "./sendtx/:/sendtx/wd/"
