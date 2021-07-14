@@ -1,7 +1,7 @@
 server:
   address: "0.0.0.0"
   port:    3836
-  agora_endpoint: http://agora:2826
+  agora_endpoint: http://node-2:2826
 
 database:
   host : "mysql"
