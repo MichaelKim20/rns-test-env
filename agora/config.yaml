@@ -12,7 +12,6 @@
 node:
   testing: true
   limit_test_validators: 1
-  block_interval_sec: 5
   data_dir: .cache
   # Can be used with curl or just a browser
   stats_listening_port: 9111
@@ -23,6 +22,7 @@ interfaces:
     port:    2826
 
 consensus:
+  block_interval_sec: 5
   validator_cycle: 20
 
 validator:
@@ -32,9 +32,12 @@ validator:
   registry_address: disabled
 
 admin:
-  enabled: true
-  address: 0.0.0.0
-  port:    2827
+  enabled: true      # `false` by default
+  tls: false         # Use local tls context - `true` by default
+  address: 0.0.0.0   # Private
+  port: 2827         # 0xB0B
+  username: admin
+  pwd: s3cr3t
 
 # The node will self-ban but this section needs at least one entry
 network:
@@ -72,11 +75,18 @@ logging:
 
 event_handlers:
   # URLs to push a data when a block is externalized. (path is "/block_externalized")
-  block_externalized:
-    - http://stoa:3836/block_externalized
+  BlockExternalized:
+    addresses:
+      - http://stoa:3836/block_externalized
+  # URLs to push a data when a block header is updated. (path is "/block_header_updated")
+  BlockHeaderUpdated:
+    addresses:
+      - http://stoa:3836/block_header_updated
   # URLs to push a data when a pre-image is updated. (path is "/preimage_received")
-  preimage_received:
-    - http://stoa:3836/preimage_received
+  PreimageReceived:
+    addresses:
+      - http://stoa:3836/preimage_received
   # URLs to push a data when a transaction is updated. (path is "/transaction_received")
-  transaction_received:
-    - http://stoa:3836/transaction_received
+  TransactionReceived:
+    addresses:
+      - http://stoa:3836/transaction_received
